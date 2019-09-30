@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>1m-ws-con</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<input type="text" name="msg" id="msg"> <input type="submit" id="send" value="ENVIAR"> 
+<div id="messages"></div>
+<script type="text/javascript">
+	var conn = new WebSocket("ws://18.223.247.37:5001?token=22222222");
+  
+	conn.onopen = function (e) {
+		console.log("Connected"); 
+		
+	};
+	conn.onmessage = function (e) {
+		console.log(e);
+		$("#messages").append(e.data);
+	};
+	conn.onclose = function (e) {
+		console.log("Closed");
+	};
+	$("#send").on("click",function(){
+		conn.send("11111111|"+$("#msg").val());
+	})
+</script>
+</body>
+</html>
